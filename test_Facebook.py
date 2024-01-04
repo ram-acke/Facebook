@@ -23,7 +23,7 @@ def launchBrowser():
     driver.quit()
 
 def test_Login(launchBrowser):
-    driver.find_element(By.ID, "email").send_keys("***************")
+    driver.find_element(By.ID, "email").send_keys("**************")
     driver.find_element(By.ID, "pass").send_keys("**************")
     driver.find_element(By.NAME, "login").click()
     assert driver.current_url == "https://www.facebook.com/"
@@ -49,4 +49,12 @@ def test_SearchFriend_and_Scrolling_Posts(launchBrowser):
         driver.execute_script("window.scrollBy(0,1000)", "")
         time.sleep(2)
 
+
+def test_Dark_Mode(launchBrowser):
+    driver.find_element(By.XPATH, "//div[@class='x78zum5 x1n2onr6']").click()  # clicking on profile icon
+    driver.find_element(By.XPATH, '(//div[@data-visualcompletion="ignore-dynamic"][@role="listitem"])[3]').click()
+    driver.find_element(By.XPATH, "//input[@value='ENABLED']").click()
+    time.sleep(3)
+    driver.find_element(By.XPATH, "//input[@value='DISABLED']").click()
+    time.sleep(5)
 
